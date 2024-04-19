@@ -1,24 +1,58 @@
+import { useEffect } from 'react';
 import { faker } from '@faker-js/faker';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
-
-import Iconify from 'src/components/iconify';
+// import Iconify from 'src/components/iconify';
 
 import AppTasks from '../app-tasks';
-import AppNewsUpdate from '../app-news-update';
+// import AppNewsUpdate from '../app-news-update';
 import AppOrderTimeline from '../app-order-timeline';
 import AppCurrentVisits from '../app-current-visits';
 import AppWebsiteVisits from '../app-website-visits';
 import AppWidgetSummary from '../app-widget-summary';
-import AppTrafficBySite from '../app-traffic-by-site';
-import AppCurrentSubject from '../app-current-subject';
+// import AppTrafficBySite from '../app-traffic-by-site';
+// import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
+
 
 // ----------------------------------------------------------------------
 
 export default function AppView() {
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFjMDdkZDg0NDQ4MjY1MjAzOThhNzEiLCJuYW1lIjoibmV3VXNlciIsImlhdCI6MTcxMzExMzA1MywiZXhwIjoxNzE1NzA1MDUzfQ.JN9UU8E6C3cB4dG0pGG-6dQksZkLxFWK9W8z3jXhHQA";
+  
+        const bodyData = {
+          email: "userTry@yopmail.com",
+          password: "userTry12234"
+        };
+  
+
+        const response = await fetch('http://localhost:3010/api/v1/auth/login', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json' 
+          
+          },
+          body: JSON.stringify(bodyData) 
+        });
+  
+        const responseData = await response.json();
+        console.log(responseData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
+
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
@@ -29,7 +63,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Weekly Sales"
-            total={714000}
+            total={71000}
             color="success"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />}
           />
@@ -38,7 +72,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="New Users"
-            total={1352831}
+            total={1352}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
           />
@@ -47,20 +81,20 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Item Orders"
-            total={1723315}
+            total={17215}
             color="warning"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_buy.png" />}
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        {/* <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Bug Reports"
             total={234}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid xs={12} md={6} lg={8}>
           <AppWebsiteVisits
@@ -82,19 +116,19 @@ export default function AppView() {
               ],
               series: [
                 {
-                  name: 'Team A',
+                  name: 'Call Orders',
                   type: 'column',
                   fill: 'solid',
                   data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
                 },
                 {
-                  name: 'Team B',
+                  name: 'Website Orders',
                   type: 'area',
                   fill: 'gradient',
                   data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
                 },
                 {
-                  name: 'Team C',
+                  name: 'App Orders',
                   type: 'line',
                   fill: 'solid',
                   data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
@@ -109,10 +143,10 @@ export default function AppView() {
             title="Current Visits"
             chart={{
               series: [
-                { label: 'America', value: 4344 },
-                { label: 'Asia', value: 5435 },
-                { label: 'Europe', value: 1443 },
-                { label: 'Africa', value: 4443 },
+                { label: 'Mumbai', value: 4344 },
+                { label: 'Ahmedabad', value: 5435 },
+                { label: 'Delhi', value: 1443 },
+                { label: 'Hyderabad', value: 4443 },
               ],
             }}
           />
@@ -124,21 +158,21 @@ export default function AppView() {
             subheader="(+43%) than last year"
             chart={{
               series: [
-                { label: 'Italy', value: 400 },
-                { label: 'Japan', value: 430 },
-                { label: 'China', value: 448 },
-                { label: 'Canada', value: 470 },
-                { label: 'France', value: 540 },
-                { label: 'Germany', value: 580 },
-                { label: 'South Korea', value: 690 },
-                { label: 'Netherlands', value: 1100 },
-                { label: 'United States', value: 1200 },
-                { label: 'United Kingdom', value: 1380 },
+                { label: 'Mumbai', value: 400 },
+                { label: 'Delhi', value: 430 },
+                { label: 'Bangalore', value: 448 },
+                { label: 'Chennai', value: 470 },
+                { label: 'Kolkata', value: 540 },
+                { label: 'Hyderabad', value: 580 },
+                { label: 'Pune', value: 690 },
+                { label: 'Ahmedabad', value: 1100 },
+                { label: 'Jaipur', value: 1200 },
+                { label: 'Surat', value: 1380 },
               ],
             }}
           />
         </Grid>
-
+{/* 
         <Grid xs={12} md={6} lg={4}>
           <AppCurrentSubject
             title="Current Subject"
@@ -151,9 +185,9 @@ export default function AppView() {
               ],
             }}
           />
-        </Grid>
+        </Grid> */}
 
-        <Grid xs={12} md={6} lg={8}>
+        {/* <Grid xs={12} md={6} lg={8}>
           <AppNewsUpdate
             title="News Update"
             list={[...Array(5)].map((_, index) => ({
@@ -164,7 +198,7 @@ export default function AppView() {
               postedAt: faker.date.recent(),
             }))}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid xs={12} md={6} lg={4}>
           <AppOrderTimeline
@@ -184,7 +218,7 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        {/* <Grid xs={12} md={6} lg={4}>
           <AppTrafficBySite
             title="Traffic by Site"
             list={[
@@ -210,7 +244,7 @@ export default function AppView() {
               },
             ]}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid xs={12} md={6} lg={8}>
           <AppTasks
