@@ -6,6 +6,7 @@ import Link from '@mui/material/Link';
 // import { useTheme } from '@mui/material/styles';
 
 import { RouterLink } from 'src/routes/components';
+import logoPng from "../../../public/assets/images/logo/logo2.png"
 
 // ----------------------------------------------------------------------
 
@@ -40,8 +41,8 @@ const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
       }}
       {...other}
     >
-
-      <img src="../../../public/assets/logo2.png" alt="IMG NOT AVAILABLE"/>
+ 
+      <img src={logoPng} alt="Logo" />
       {/* <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 512 512">
         <defs>
           <linearGradient id="BG1" x1="100%" x2="50%" y1="9.946%" y2="50%">
