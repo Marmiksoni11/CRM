@@ -20,7 +20,7 @@ export default function UserTableRow({
   selected,
   name,
   avatarUrl,
-  company,
+  email,
   role,
   isVerified,
   status,
@@ -52,7 +52,7 @@ export default function UserTableRow({
           </Stack>
         </TableCell>
 
-        <TableCell>{company}</TableCell>
+        <TableCell>{email}</TableCell>
 
         <TableCell>{role}</TableCell>
 
@@ -62,11 +62,11 @@ export default function UserTableRow({
           <Label color={(status === 'banned' && 'error') || 'success'}>{status}</Label>
         </TableCell>
 
-        <TableCell align="right">
+        {/* <TableCell align="right">
           <IconButton onClick={handleOpenMenu}>
             <Iconify icon="eva:more-vertical-fill" />
           </IconButton>
-        </TableCell>
+        </TableCell> */}
       </TableRow>
 
       <Popover

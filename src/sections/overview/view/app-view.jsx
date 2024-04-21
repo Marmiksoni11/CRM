@@ -16,42 +16,38 @@ import AppWidgetSummary from '../app-widget-summary';
 // import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
 
-
 // ----------------------------------------------------------------------
 
 export default function AppView() {
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFjMDdkZDg0NDQ4MjY1MjAzOThhNzEiLCJuYW1lIjoibmV3VXNlciIsImlhdCI6MTcxMzExMzA1MywiZXhwIjoxNzE1NzA1MDUzfQ.JN9UU8E6C3cB4dG0pGG-6dQksZkLxFWK9W8z3jXhHQA";
-  
+        const token =
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFjMDdkZDg0NDQ4MjY1MjAzOThhNzEiLCJuYW1lIjoibmV3VXNlciIsImlhdCI6MTcxMzExMzA1MywiZXhwIjoxNzE1NzA1MDUzfQ.JN9UU8E6C3cB4dG0pGG-6dQksZkLxFWK9W8z3jXhHQA';
+
         const bodyData = {
-          email: "userTry@yopmail.com",
-          password: "userTry12234"
+          email: 'userTry@yopmail.com',
+          password: 'userTry12234',
         };
-  
 
         const response = await fetch('http://localhost:3010/api/v1/auth/login', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json' 
-          
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify(bodyData) 
+          body: JSON.stringify(bodyData),
         });
-  
+
         const responseData = await response.json();
         console.log(responseData);
       } catch (error) {
         console.log(error);
       }
     };
-  
+
     fetchData();
   }, []);
-  
 
   return (
     <Container maxWidth="xl">
@@ -172,8 +168,8 @@ export default function AppView() {
             }}
           />
         </Grid>
-{/* 
-        <Grid xs={12} md={6} lg={4}>
+
+        {/* <Grid xs={12} md={6} lg={4}>
           <AppCurrentSubject
             title="Current Subject"
             chart={{
@@ -250,11 +246,11 @@ export default function AppView() {
           <AppTasks
             title="Tasks"
             list={[
-              { id: '1', name: 'Create FireStone Logo' },
-              { id: '2', name: 'Add SCSS and JS files if required' },
-              { id: '3', name: 'Stakeholder Meeting' },
-              { id: '4', name: 'Scoping & Estimations' },
-              { id: '5', name: 'Sprint Showcase' },
+              { id: '1', name: 'Design new menu layout' },
+              { id: '2', name: 'Implement user authentication system' },
+              { id: '3', name: 'Add payment gateway integration' },
+              { id: '4', name: 'Create promotional campaigns for new menu items' },
+              { id: '5', name: 'Optimize website for mobile devices' },
             ]}
           />
         </Grid>

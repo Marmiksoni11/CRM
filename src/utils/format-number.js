@@ -6,10 +6,18 @@ export function fNumber(number) {
   return numeral(number).format();
 }
 
-export function fCurrency(number) {
-  const format = number ? numeral(number).format('$0,0.00') : '';
+export function fCurrency(number, type) {
 
-  return result(format, '.00');
+  if(type === "india"){
+
+    const format = `${number}`
+
+    return format;
+  
+  }
+    const format = number ? numeral(number).format('$0,0.00') : '';
+    return result(format, '.00');
+
 }
 
 export function fPercent(number) {

@@ -11,6 +11,9 @@ import ThemeProvider from 'src/theme';
 export default function App() {
   useScrollToTop();
 
+
+  // useEffect(() => {})
+
   return (
     <ThemeProvider>
       <Router />

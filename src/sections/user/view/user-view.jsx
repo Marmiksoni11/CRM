@@ -21,6 +21,7 @@ import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
 import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
+import Dailog from 'src/layouts/dashboard/common/Dailog';
 
 // ----------------------------------------------------------------------
 
@@ -37,7 +38,17 @@ export default function UserPage() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const [open, setOpen] = useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  console.log("users ----- > ", users);
+  
   // export const users = [...Array(24)].map((_, index) => ({
   //   id: faker.string.uuid(),
   //   avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
@@ -122,7 +133,7 @@ export default function UserPage() {
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">Users</Typography>
 
-        <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
+        <Button onClick={handleClickOpen} variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
           New User
         </Button>
       </Stack>
@@ -146,7 +157,7 @@ export default function UserPage() {
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
                   { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
+                  { id: 'email', label: 'Email' },
                   { id: 'role', label: 'Role' },
                   { id: 'isVerified', label: 'Verified', align: 'center' },
                   { id: 'status', label: 'Status' },
@@ -162,9 +173,9 @@ export default function UserPage() {
                       name={row.name}
                       role={row.role}
                       status={row.status}
-                      company={row.company}
+                      email={row.email}
                       avatarUrl={row.avatarUrl}
-                      isVerified={row.isVerified}
+                      // isVerified={row.isVerified}
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                     />
@@ -191,6 +202,11 @@ export default function UserPage() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Card>
+
+      <Dailog 
+        openStatus={open}
+        handleClose={handleClose}
+      />
     </Container>
   );
 }

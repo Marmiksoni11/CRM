@@ -8,7 +8,7 @@ import { alpha } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-
+import { useNavigate  } from 'react-router-dom';
 import { account } from 'src/_mock/account';
 
 // ----------------------------------------------------------------------
@@ -17,21 +17,24 @@ const MENU_OPTIONS = [
   {
     label: 'Home',
     icon: 'eva:home-fill',
+    route: '/',
   },
   {
-    label: 'Profile',
+    label: 'Website',
     icon: 'eva:person-fill',
+    route: 'https://sore-ruby-squirrel-sari.cyclic.app/home.html', 
   },
-  {
-    label: 'Settings',
-    icon: 'eva:settings-2-fill',
-  },
+  // {
+  //   label: 'Settings',
+  //   icon: 'eva:settings-2-fill',
+  // },
 ];
 
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
+  const navigate = useNavigate(); 
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
@@ -39,6 +42,15 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     setOpen(null);
+  };
+
+  const handleMenuItemClick = (route) => {
+    if (route.startsWith('http')) {
+      window.open(route, '_blank');
+    } else {
+      navigate(route);
+    }
+    handleClose(); 
   };
 
   return (
@@ -95,21 +107,21 @@ export default function AccountPopover() {
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         {MENU_OPTIONS.map((option) => (
-          <MenuItem key={option.label} onClick={handleClose}>
+          <MenuItem key={option.label}onClick={() => handleMenuItemClick(option.route)}>
             {option.label}
           </MenuItem>
         ))}
 
         <Divider sx={{ borderStyle: 'dashed', m: 0 }} />
 
-        <MenuItem
+        {/* <MenuItem
           disableRipple
           disableTouchRipple
           onClick={handleClose}
           sx={{ typography: 'body2', color: 'error.main', py: 1.5 }}
         >
           Logout
-        </MenuItem>
+        </MenuItem> */}
       </Popover>
     </>
   );

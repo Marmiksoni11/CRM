@@ -9,7 +9,12 @@ import Logo from 'src/components/logo';
 
 // ----------------------------------------------------------------------
 
-export default function NotFoundView() {
+export default function NotFoundView(props) {
+  const { 
+    custom = false,
+    failure = false,
+    data
+  } = props
   const renderHeader = (
     <Box
       component="header"
@@ -25,49 +30,119 @@ export default function NotFoundView() {
       <Logo />
     </Box>
   );
-
   return (
     <>
       {renderHeader}
-
-      <Container>
-        <Box
-          sx={{
-            py: 12,
-            maxWidth: 480,
-            mx: 'auto',
-            display: 'flex',
-            minHeight: '100vh',
-            textAlign: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            justifyContent: 'center',
-          }}
-        >
-          <Typography variant="h3" sx={{ mb: 3 }}>
-            Sorry, page not found!
-          </Typography>
-
-          <Typography sx={{ color: 'text.secondary' }}>
-            Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be
-            sure to check your spelling.
-          </Typography>
-
+  
+      {custom ? (
+        <Container>
           <Box
-            component="img"
-            src="/assets/illustrations/illustration_404.svg"
             sx={{
+              py: 12,
+              maxWidth: 480,
               mx: 'auto',
-              height: 260,
-              my: { xs: 5, sm: 10 },
+              display: 'flex',
+              minHeight: '100vh',
+              textAlign: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
             }}
-          />
-
-          <Button href="/" size="large" variant="contained" component={RouterLink}>
-            Go to Home
-          </Button>
-        </Box>
-      </Container>
+          >
+            <Typography variant="h3" sx={{ mb: 3 }}>
+              Sorry, No record found!
+            </Typography>
+  
+            <Typography sx={{ color: 'text.secondary' }}>
+              Sorry, we couldn’t find the {data} you’re looking for.
+            </Typography>
+  
+            <Box
+              component="img"
+              src="/assets/illustrations/illustration_404.svg"
+              sx={{
+                mx: 'auto',
+                height: 260,
+                my: { xs: 5, sm: 10 },
+              }}
+            />
+          </Box>
+        </Container>
+      ) : failure ? (
+        <Container>
+          <Box
+            sx={{
+              py: 12,
+              maxWidth: 480,
+              mx: 'auto',
+              display: 'flex',
+              minHeight: '100vh',
+              textAlign: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography variant="h3" sx={{ mb: 3 }}>
+            Oops! Something Went Wrong.
+            </Typography>
+  
+            <Typography sx={{ color: 'text.secondary' }}>
+            We're sorry, but it looks like there was an issue with our server while fetching the data.
+        Please try again later.
+            </Typography>
+  
+            <Box
+              component="img"
+              src="/assets/illustrations/illustration_404.svg"
+              sx={{
+                mx: 'auto',
+                height: 260,
+                my: { xs: 5, sm: 10 },
+              }}
+            />
+          </Box>
+        </Container>
+      ) : (
+        <Container>
+          <Box
+            sx={{
+              py: 12,
+              maxWidth: 480,
+              mx: 'auto',
+              display: 'flex',
+              minHeight: '100vh',
+              textAlign: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography variant="h3" sx={{ mb: 3 }}>
+              Sorry, page not found!
+            </Typography>
+  
+            <Typography sx={{ color: 'text.secondary' }}>
+              Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be sure to check your spelling.
+            </Typography>
+  
+            <Box
+              component="img"
+              src="/assets/illustrations/illustration_404.svg"
+              sx={{
+                mx: 'auto',
+                height: 260,
+                my: { xs: 5, sm: 10 },
+              }}
+            />
+  
+            <Button href="/" size="large" variant="contained" component={RouterLink}>
+              Go to Home
+            </Button>
+          </Box>
+        </Container>
+      )}
     </>
   );
+  
 }

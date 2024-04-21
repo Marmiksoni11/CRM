@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+import { useState, useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Radio from '@mui/material/Radio';
@@ -21,18 +21,52 @@ import { ColorPicker } from 'src/components/color-utils';
 // ----------------------------------------------------------------------
 
 export const SORT_OPTIONS = [
-  { value: 'featured', label: 'Featured' },
-  { value: 'newest', label: 'Newest' },
+  // { value: 'featured', label: 'Featured' },
+  // { value: 'newest', label: 'Newest' },
   { value: 'priceDesc', label: 'Price: High-Low' },
   { value: 'priceAsc', label: 'Price: Low-High' },
 ];
 export const GENDER_OPTIONS = ['Men', 'Women', 'Kids'];
-export const CATEGORY_OPTIONS = ['All', 'Shose', 'Apparel', 'Accessories'];
+
+export const CATEGORY_OPTIONS = [
+  {
+    item:'Pizzas',
+    id:'pizza'
+  },
+  {
+    item:'Burgers',
+    id:'burger'
+  },
+  {
+    item:'Best-Sellers',
+    id:'bestSellers'
+  },
+  {
+    item:'Beverages',
+    id:'beverages'
+  },
+  {
+    item:'Chinese',
+    id:'chinese'
+  },
+  {
+    item:'Wraps & Rolls',
+    id:'wrapsAndRolls'
+  },
+  {
+    item:'Thalis',
+    id:'thali'
+  },
+];
+
 export const RATING_OPTIONS = ['up4Star', 'up3Star', 'up2Star', 'up1Star'];
+
 export const PRICE_OPTIONS = [
-  { value: 'below', label: 'Below $25' },
-  { value: 'between', label: 'Between $25 - $75' },
-  { value: 'above', label: 'Above $75' },
+
+  { value: 'below', label: 'Below ₹100' },
+  { value: 'between', label: 'Between ₹100 & ₹300' },
+  { value: 'above', label: 'Above ₹300' },
+
 ];
 export const COLOR_OPTIONS = [
   '#00AB55',
@@ -47,7 +81,17 @@ export const COLOR_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter }) {
+export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter, onApplyFilters }) {
+
+  const [category, setCategory] = useState({});
+  const [price, setPrice] = useState("");
+
+  const handleApplyFilters = (selectedCategory, selectedPrice) => {
+    onApplyFilters(selectedCategory?.id || "", selectedPrice || "");
+    setCategory(selectedCategory || {});
+    setPrice(selectedPrice || "");
+  };
+
   const renderGender = (
     <Stack spacing={1}>
       <Typography variant="subtitle2">Gender</Typography>
@@ -62,9 +106,15 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
   const renderCategory = (
     <Stack spacing={1}>
       <Typography variant="subtitle2">Category</Typography>
-      <RadioGroup>
+      <RadioGroup value={category.id} >
         {CATEGORY_OPTIONS.map((item) => (
-          <FormControlLabel key={item} value={item} control={<Radio />} label={item} />
+          <FormControlLabel 
+            key={item.id} 
+            value={item.id} 
+            control={<Radio />} 
+            label={item.item} 
+            onChange={() => handleApplyFilters(item,price)}
+            />
         ))}
       </RadioGroup>
     </Stack>
@@ -86,13 +136,14 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
   const renderPrice = (
     <Stack spacing={1}>
       <Typography variant="subtitle2">Price</Typography>
-      <RadioGroup>
+      <RadioGroup value={price}>
         {PRICE_OPTIONS.map((item) => (
           <FormControlLabel
             key={item.value}
             value={item.value}
             control={<Radio />}
             label={item.label}
+            onChange={() => handleApplyFilters(category, item.value)}
           />
         ))}
       </RadioGroup>
@@ -167,15 +218,8 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
 
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
-            {renderGender}
-
             {renderCategory}
-
-            {renderColors}
-
             {renderPrice}
-
-            {renderRating}
           </Stack>
         </Scrollbar>
 
@@ -187,6 +231,11 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
             color="inherit"
             variant="outlined"
             startIcon={<Iconify icon="ic:round-clear-all" />}
+            onClick={() => {
+              onApplyFilters("","")
+              setPrice("")
+              setCategory({})
+            }}
           >
             Clear All
           </Button>
