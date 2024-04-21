@@ -1,5 +1,5 @@
+import { useState} from 'react';
 import PropTypes from 'prop-types';
-import { useState, useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Radio from '@mui/material/Radio';
@@ -249,4 +249,5 @@ ProductFilters.propTypes = {
   openFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
+  onApplyFilters:PropTypes.func
 };

@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { listClasses } from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-
 import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
@@ -79,3 +79,8 @@ export default function ShopProductSort({ onApplySort }) {
     </>
   );
 }
+
+
+ShopProductSort.propTypes = {
+  onApplySort: PropTypes.func
+};

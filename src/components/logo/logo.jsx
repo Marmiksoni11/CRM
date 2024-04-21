@@ -7,7 +7,6 @@ import Link from '@mui/material/Link';
 
 import { RouterLink } from 'src/routes/components';
 import logoPng from "../../../public/assets/images/logo/logo2.png"
-
 // ----------------------------------------------------------------------
 
 const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
