@@ -19,35 +19,6 @@ import AppConversionRates from '../app-conversion-rates';
 // ----------------------------------------------------------------------
 
 export default function AppView() {
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token =
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFjMDdkZDg0NDQ4MjY1MjAzOThhNzEiLCJuYW1lIjoibmV3VXNlciIsImlhdCI6MTcxMzExMzA1MywiZXhwIjoxNzE1NzA1MDUzfQ.JN9UU8E6C3cB4dG0pGG-6dQksZkLxFWK9W8z3jXhHQA';
-
-        const bodyData = {
-          email: 'userTry@yopmail.com',
-          password: 'userTry12234',
-        };
-
-        const response = await fetch('http://localhost:3010/api/v1/auth/login', {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(bodyData),
-        });
-
-        const responseData = await response.json();
-        console.log(responseData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <Container maxWidth="xl">

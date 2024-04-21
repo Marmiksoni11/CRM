@@ -89,16 +89,16 @@ export default function ProductsView() {
       <Grid container spacing={3}>
         {(() => {
           if (products && products?.status === 'success' && products?.data?.length === 0) {
-            return <NotFoundView custom data={'Products'} />;
-          } else if (products && products?.status === 'failure') {
-            return <NotFoundView failure />;
-          } else {
-            return products?.data?.map((product) => (
-              <Grid key={product?._id} xs={12} sm={6} md={3}>
-                <ProductCard product={product} />
-              </Grid>
-            ));
+            return <NotFoundView custom data='Products' />;
           }
+          if (products && products?.status === 'failure') {
+            return <NotFoundView failure />;
+          }
+          return products?.data?.map((product) => (
+            <Grid key={product?._id} xs={12} sm={6} md={3}>
+              <ProductCard product={product} />
+            </Grid>
+          ));
         })()}
       </Grid>
 
