@@ -10,6 +10,7 @@ import { fCurrency } from 'src/utils/format-number';
 
 import Label from 'src/components/label';
 // import { ColorPreview } from 'src/components/color-utils';
+// import "../../../dist/assets/images/bestsellers/pizza.jpg"
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +27,7 @@ export default function ShopProductCard({ product }) {
         textTransform: 'uppercase',
       }}
     >
-      {product.status}
+      {product.status} 
     </Label>
   );
 
@@ -34,7 +35,7 @@ export default function ShopProductCard({ product }) {
     <Box
       component="img"
       alt={product.name}
-      src={product.category === "bestSellers" || product._id === "66237779dd106ee34a4352ba" ? `../../../public/assets${product.image}` : product.image}
+      src={product.category === "bestSellers" || product._id === "66237779dd106ee34a4352ba" ? `/assets${product.image}` : product.image}
       sx={{
         top: 0,
         width: 1,
@@ -67,7 +68,7 @@ export default function ShopProductCard({ product }) {
       <Box sx={{ pt: '100%', position: 'relative' }}>
         {product.status && renderStatus}
 
-        {renderImg}
+        {renderImg} 
       </Box>
 
       <Stack spacing={2} sx={{ p: 3 }}>

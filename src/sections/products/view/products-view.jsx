@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import ProductCard from '../product-card';
 import ProductSort from '../product-sort';
 import ProductFilters from '../product-filters';
-import ProductCartWidget from '../product-cart-widget';
+// import ProductCartWidget from '../product-cart-widget';
 
 // ----------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ export default function ProductsView() {
         })()}
       </Grid>
 
-      <ProductCartWidget />
+      {/* <ProductCartWidget />  */}
     </Container>
   );
 }
