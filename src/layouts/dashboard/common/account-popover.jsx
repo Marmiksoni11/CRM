@@ -22,7 +22,7 @@ const MENU_OPTIONS = [
   {
     label: 'Website',
     icon: 'eva:person-fill',
-    route: 'https://sore-ruby-squirrel-sari.cyclic.app/home.html', 
+    route: 'http://localhost:3020/home.html', 
   },
   // {
   //   label: 'Settings',
