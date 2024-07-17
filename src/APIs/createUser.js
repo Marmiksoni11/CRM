@@ -3,6 +3,7 @@ export const createUser = async (userData) => {
     const token =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFjMDdkZDg0NDQ4MjY1MjAzOThhNzEiLCJuYW1lIjoibmV3VXNlciIsImlhdCI6MTcxMzExMzA1MywiZXhwIjoxNzE1NzA1MDUzfQ.JN9UU8E6C3cB4dG0pGG-6dQksZkLxFWK9W8z3jXhHQA';
 
+      // smit this side!!
     // const url = new URL('https://sore-ruby-squirrel-sari.cyclic.app/api/v1/admin/createUser');
     // const url = new URL('https://fresh-foods-git-master-marmiksoni11s-projects.vercel.app/api/v1/admin/createUser');
    
