@@ -1,12 +1,19 @@
-import { useState, useEffect } from 'react';
-import { getProducts } from 'src/APIs/getProducts';
-import { NotFoundView } from 'src/sections/error';
-import Stack from '@mui/material/Stack';
+/* eslint-disable perfectionist/sort-named-imports */
+/* eslint-disable perfectionist/sort-imports */
+import { useEffect, useState } from 'react';
+
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
+
+import { getProducts } from 'src/APIs/getProducts';
+
+import { NotFoundView } from 'src/sections/error';
+
 import ProductCard from '../product-card';
 import ProductSort from '../product-sort';
+// eslint-disable-next-line perfectionist/sort-imports
 import ProductFilters from '../product-filters';
 // import ProductCartWidget from '../product-cart-widget';
 

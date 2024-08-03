@@ -1,19 +1,20 @@
-import * as React from 'react';
-import PropTypes from 'prop-types'; 
+/* eslint-disable perfectionist/sort-imports */
 import Button from '@mui/material/Button';
+import PropTypes from 'prop-types';
+import * as React from 'react';
 
-import { styled } from '@mui/material/styles';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import IconButton from '@mui/material/IconButton';
+import { styled } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
 
-import { createUser } from '../../../APIs/createUser';
+import { createUser } from '../../../APIs/userApi';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {

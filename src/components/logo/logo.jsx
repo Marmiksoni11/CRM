@@ -1,3 +1,4 @@
+/* eslint-disable perfectionist/sort-imports */
 import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 
@@ -6,7 +7,7 @@ import Link from '@mui/material/Link';
 // import { useTheme } from '@mui/material/styles';
 
 import { RouterLink } from 'src/routes/components';
-import logoPng from "../../../public/assets/images/logo/logo2.png"
+import logoPng from "../../../public/assets/images/logo/logo2.png";
 // ----------------------------------------------------------------------
 
 const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {

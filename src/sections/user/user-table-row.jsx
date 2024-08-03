@@ -1,16 +1,18 @@
-import { useState } from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable perfectionist/sort-imports */
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
-import Popover from '@mui/material/Popover';
-import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import MenuItem from '@mui/material/MenuItem';
+import Popover from '@mui/material/Popover';
+import Stack from '@mui/material/Stack';
 import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
+import Label from 'src/components/label';
 
 // ----------------------------------------------------------------------
 

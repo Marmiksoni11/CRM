@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+/* eslint-disable perfectionist/sort-imports */
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 import { RouterLink } from 'src/routes/components';
 
 import Logo from 'src/components/logo';

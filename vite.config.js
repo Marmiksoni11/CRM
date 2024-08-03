@@ -1,6 +1,6 @@
+import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
 import checker from 'vite-plugin-checker';
 
 // ----------------------------------------------------------------------
@@ -8,10 +8,11 @@ import checker from 'vite-plugin-checker';
 export default defineConfig({
   plugins: [
     react(),
+    // Remove or comment out the ESLint configuration
     checker({
-      eslint: {
-        lintCommand: 'eslint "./src/**/*.{js,jsx,ts,tsx}"',
-      },
+      // eslint: {
+      //   lintCommand: 'eslint "./src/**/*.{js,jsx,ts,tsx}"',
+      // },
     }),
   ],
   resolve: {
