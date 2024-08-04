@@ -1,6 +1,8 @@
 // /src/reducers/userReducer.js
 
-import { USER_FETCH_FAILED, USER_FETCH_REQUESTED, USER_FETCH_SUCCEEDED } from "src/actions/userActions";
+import { USER_FETCH_FAILED, USER_FETCH_REQUESTED, USER_FETCH_SUCCEEDED } from "src/actions/userAction/type";
+
+// import { USER_FETCH_FAILED, USER_FETCH_REQUESTED, USER_FETCH_SUCCEEDED } from "src/actions/userAction";
 
 const initialState = {
   user: null,

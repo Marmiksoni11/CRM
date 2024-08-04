@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import LoadingButton from '@mui/lab/LoadingButton';
 import Box from '@mui/material/Box';
@@ -19,29 +19,57 @@ import { bgGradient } from 'src/theme/css';
 
 import Iconify from 'src/components/iconify';
 import Logo from 'src/components/logo';
+import { useDispatch, useSelector } from 'react-redux';
+import { CreateUserReq } from 'src/actions/userAction/CreateUserAction';
+import { fetchUserReq } from 'src/actions/userAction/FetchUserAction';
+// import { createUserRequested } from 'src/actions/userActions';
 
 // ----------------------------------------------------------------------
 
 export default function LoginView() {
   const theme = useTheme();
-
+  const dispatch = useDispatch()
+  const user = useSelector((state)=> state?.users?.user);
+  console.log("user===>",user)
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    number: "",
+    email: "",
+  });
 
+  console.log("formData===>>>",formData)
   const handleClick = () => {
-    router.push('/dashboard');
+    dispatch(CreateUserReq(formData))
+    router.push('/');
   };
 
+  const handleFormData = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  useEffect(()=>{
+    dispatch({type:"USER_FETCH_REQUESTED"});
+  },[dispatch])
   const renderForm = (
     <>
       <Stack spacing={3}>
-        <TextField name="email" label="Email address" />
-
-        <TextField
+        <TextField name="first_name" label="First Name" onChange={handleFormData} />
+        <TextField name="last_name" label="Last Name" onChange={handleFormData} />
+        <TextField name="number" label="Contact" onChange={handleFormData} />
+        <TextField name="email" label="Email Address" onChange={handleFormData} />
+        {/* <TextField
           name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
+          onChange={handleFormData}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -51,7 +79,7 @@ export default function LoginView() {
               </InputAdornment>
             ),
           }}
-        />
+        /> */}
       </Stack>
 
       <Stack direction="row" alignItems="center" justifyContent="flex-end" sx={{ my: 3 }}>
@@ -69,7 +97,7 @@ export default function LoginView() {
         onClick={handleClick}
       >
         Login
-      </LoadingButton>
+      </LoadingButton >
     </>
   );
 
