@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-
+import { useFormik } from 'formik';
+import { connect } from 'react-redux';
+import * as Yup from 'yup';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -12,65 +14,107 @@ import Stack from '@mui/material/Stack';
 import { alpha, useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-
 import { useRouter } from 'src/routes/hooks';
-
 import { bgGradient } from 'src/theme/css';
-
 import Iconify from 'src/components/iconify';
 import Logo from 'src/components/logo';
 import { useDispatch, useSelector } from 'react-redux';
-import { CreateUserReq } from 'src/actions/userAction/CreateUserAction';
-import { fetchUserReq } from 'src/actions/userAction/FetchUserAction';
-// import { createUserRequested } from 'src/actions/userActions';
+import { useNavigate } from 'react-router-dom';
+import { login_user_request } from 'src/actions/authActions';
 
 // ----------------------------------------------------------------------
 
-
-export default function LoginView() {
+function LoginView({ login_user_request, state }) {
   const theme = useTheme();
-  const dispatch = useDispatch()
-  const user = useSelector((state)=> state?.users?.user);
-  console.log("user===>",user)
-  const router = useRouter();
-
+  // const user = state?.users?.user
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    number: "",
-    email: "",
+
+  // console.log("users", users);
+  // console.log("user", user);
+
+  const handleClick = () => {
+    // dispatch(CreateUserReq(formData));
+    navigate('/');
+  };
+
+  const handleNav = () => {
+    navigate('/register');
+  };
+
+  // const onFormSubmit = (values) => {
+  //   const { username_or_email, password } = values;
+  //   if(username_or_email && password){
+  //     let payload = {
+  //       username_or_email,
+  //       password
+  //     }
+  //     login_user_request(payload)
+  //   }
+  // };
+
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleFocus,
+    handleBlur,
+    isSubmitting,
+    handleSubmit,
+  } = useFormik({
+    initialValues: {
+      username_or_email: '',
+      password: '',
+    },
+    validationSchema: Yup.object({
+      username_or_email: Yup.string().required('Username or Email is required'),
+      password: Yup.string().required('Password is required'),
+    }),
+    onSubmit: (values) => {
+      const { username_or_email, password } = values;
+      if (username_or_email && password) {
+        let payload = {
+          username_or_email,
+          password,
+        };
+        login_user_request(payload);
+      }
+    },
   });
 
-  console.log("formData===>>>",formData)
-  const handleClick = () => {
-    dispatch(CreateUserReq(formData))
-    router.push('/');
-  };
-
-  const handleFormData = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  useEffect(()=>{
-    dispatch({type:"USER_FETCH_REQUESTED"});
-  },[dispatch])
   const renderForm = (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        // formikSubmit(e);
+        handleSubmit(e);
+        // console.log(" Checking Number 1");
+      }}
+    >
+      {/* {console.log("touched.username_or_email && errors.username_or_email", touched.username_or_email && errors.username_or_email)} */}
+
       <Stack spacing={3}>
-        <TextField name="first_name" label="First Name" onChange={handleFormData} />
-        <TextField name="last_name" label="Last Name" onChange={handleFormData} />
-        <TextField name="number" label="Contact" onChange={handleFormData} />
-        <TextField name="email" label="Email Address" onChange={handleFormData} />
-        {/* <TextField
+        <TextField
+          name="username_or_email"
+          label="Username or Email"
+          value={values.username_or_email}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          error={errors.username_or_email}
+          helperText={touched.username_or_email ? errors.username_or_email : ''}
+        />
+        <TextField
           name="password"
           label="Password"
+          value={values.password}
           type={showPassword ? 'text' : 'password'}
-          onChange={handleFormData}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          error={errors.password}
+          helperText={touched.password ? errors.password : ''}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -80,7 +124,7 @@ export default function LoginView() {
               </InputAdornment>
             ),
           }}
-        /> */}
+        />
       </Stack>
 
       <Stack direction="row" alignItems="center" justifyContent="flex-end" sx={{ my: 3 }}>
@@ -89,19 +133,19 @@ export default function LoginView() {
         </Link>
       </Stack>
 
-      <LoadingButton
+      <Button
+        // loading={isSubmitting}
+        // disabled={isSubmitting}
         fullWidth
         size="large"
         type="submit"
         variant="contained"
         color="inherit"
-        onClick={handleClick}
       >
         Login
-      </LoadingButton >
-    </>
+      </Button>
+    </form>
   );
-
   return (
     <Box
       sx={{
@@ -128,11 +172,11 @@ export default function LoginView() {
             maxWidth: 420,
           }}
         >
-          <Typography variant="h4">Sign in to Minimal</Typography>
+          <Typography variant="h4">Sign In</Typography>
 
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
             Don’t have an account?
-            <Link variant="subtitle2" sx={{ ml: 0.5 }}>
+            <Link variant="subtitle2" sx={{ ml: 0.5, cursor: 'pointer' }} onClick={handleNav}>
               Get started
             </Link>
           </Typography>
@@ -174,10 +218,22 @@ export default function LoginView() {
               OR
             </Typography>
           </Divider>
-
           {renderForm}
         </Card>
       </Stack>
     </Box>
   );
 }
+
+const mapStateToProps = (state) => ({
+  state: state,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  login_user_request: (payload) => {
+    console.log('Dispatching login_user_request action')
+    dispatch(login_user_request(payload));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginView);

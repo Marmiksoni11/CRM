@@ -14,8 +14,6 @@ import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 
-import { createUser } from '../../../APIs/userApi';
-
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -56,13 +54,13 @@ export default function Dailog({ openStatus, handleClose }) {
       make_admin: isAdmin,
     };
   
-    const result = await createUser(userData);
+    // const result = await createUser(userData);
   
-    if (result.status === 'success') {
-      console.log('User added successfully:', result.data);
-    } else {
-      console.error('Failed to add user:', result.error);
-    }
+    // if (result.status === 'success') {
+    //   console.log('User added successfully:', result.data);
+    // } else {
+    //   console.error('Failed to add user:', result.error);
+    // }
 
 
     setName('');

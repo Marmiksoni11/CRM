@@ -1,25 +1,36 @@
-// /src/reducers/userReducer.js
-
-import { USER_FETCH_FAILED, USER_FETCH_REQUESTED, USER_FETCH_SUCCEEDED } from "src/actions/userAction/type";
-
-// import { USER_FETCH_FAILED, USER_FETCH_REQUESTED, USER_FETCH_SUCCEEDED } from "src/actions/userAction";
+import {
+  get_user_request,
+  get_user_success,
+  get_user_failure,
+} from '../actions/userActions';
 
 const initialState = {
-  user: null,
+  loading: false,
+  data: null,
   error: null,
-  loading:false
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USER_FETCH_REQUESTED:
-        return {...state,loading:true};
-    case USER_FETCH_SUCCEEDED:
-        return { ...state, user: action.payload, error: null };
-    case USER_FETCH_FAILED:
-        return { ...state, error: action.payload };
+    case get_user_request:
+      return {
+        ...state,
+        loading: true,
+      };
+    case get_user_success:
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+    case get_user_failure:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
     default:
-        return state;
+      return state;
   }
 };
 

@@ -4,8 +4,7 @@ import { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { Provider } from 'react-redux'; // Import Provider
-// import store from './store'; // Import your configured store
+import { Provider } from 'react-redux';
 
 import App from './app';
 import store from './store/Store';
